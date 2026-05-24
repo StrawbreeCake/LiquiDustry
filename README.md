@@ -1,4 +1,4 @@
-![Titlecard for LIQUIDUSTRY.](https://github.com/StrawbreeCake/LiquiDustry/assets/icons/liquidustry-titlecard.png)
+![logo](assets/icons/liquidustry-titlecard.png)
 
 # LiquiDustry - a fluidic mod for Mindustry, the RTS game
 
@@ -22,4 +22,4 @@ Installation:
 * Open "import from GitHub"
 * Write: StrawbreeCake/LiquiDustry
 
-![Signoff.](https://github.com/StrawbreeCake/LiquiDustry/assets/icons/StrawbreeCake-Mini.png)
+![Signoff.](assets/icons/StrawbreeCake-Mini.png)
