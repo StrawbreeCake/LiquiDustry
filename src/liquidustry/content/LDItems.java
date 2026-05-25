@@ -16,70 +16,50 @@ public class LDItems {
 
     public static void load(){
         gelledArkycite = new Item("gelled-arkycite", Color.valueOf("49b247")){{
-            explosiveness = 0.4f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
+            flammability = 0.0f;
+            explosiveness = 0.0f;
         }};
         gelledCryofluid = new Item("gelled-cryofluid", Color.valueOf("a5c7ff")){{
+            flammability = 0.0f;
             explosiveness = 0.0f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
         }};
         gelledCyanogen = new Item("gelled-cyanogen", Color.valueOf("1ce4bf")){{
             explosiveness = 0.4f;
             radioactivity = 0.0f;
-            cost = 1.6f;
             hideDetails = false;
         }};
         gelledGallium = new Item("gelled-gallium", Color.valueOf("a9a9a9")){{
+            flammability = 0.0f;
             explosiveness = 0.0f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
         }};
         gelledHydrogen = new Item("gelled-hydrogen", Color.valueOf("7b8fe4")){{
-            explosiveness = 0.8f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
+            flammability = 1.0f;
+            explosiveness = 1.0f;
         }};
         gelledNeoplasm = new Item("gelled-neoplasm", Color.valueOf("a02020")){{
-            explosiveness = 0.4f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
+            flammability = 0.8f;
+            explosiveness = 0.0f;
         }};
         gelledNitrogen = new Item("gelled-nitrogen", Color.valueOf("eaeaea")){{
+            flammability = 0.0f;
             explosiveness = 0.0f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
         }};
         gelledOil = new Item("gelled-oil", Color.valueOf("191919")){{
-            explosiveness = 0.6f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
+            flammability = 1.2f;
+            explosiveness = 1.2f;
         }};
         gelledOzone = new Item("gelled-ozone", Color.valueOf("e47bba")){{
             explosiveness = 0.0f;
             radioactivity = 0.0f;
-            cost = 1.6f;
             hideDetails = false;
         }};
         gelledSlag = new Item("gelled-slag", Color.valueOf("e39322")){{
-            explosiveness = 0.0f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
+            flammability = 1.2f;
+            explosiveness = 1.2f;
         }};
         gelledWater = new Item("gelled-water", Color.valueOf("d7f1f8")){{
+            flammability = 0.0f;
             explosiveness = 0.0f;
-            radioactivity = 0.0f;
-            cost = 1.6f;
-            hideDetails = false;
         }};
         // NOW that they are loaded, put them in a native Arc array (Seq is Iterable!)
         allGels = Seq.with(

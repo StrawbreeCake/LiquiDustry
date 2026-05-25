@@ -23,11 +23,6 @@ public class LDTechTree{
         vanillaNode("erekir", gelationStation, () -> {
             node(liquidizer);
         });
-
-        vanillaNode("erekir", gelationStation, () -> {
-            node(microLiquidizer);
-        });
-
     }
 
     // private static void vanillaNode(UnlockableContent parent, Runnable children){

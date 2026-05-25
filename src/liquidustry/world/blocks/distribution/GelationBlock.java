@@ -1,5 +1,9 @@
-package liquidustry.world.blocks.liquid;
+package liquidustry.world.blocks.distribution;
 
+import arc.Core;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
+import arc.graphics.Color;
 import mindustry.gen.Building;
 import mindustry.type.Item;
 import mindustry.type.Liquid;
@@ -8,8 +12,11 @@ import mindustry.world.blocks.ItemSelection;
 import mindustry.world.blocks.liquid.*;
 import arc.scene.ui.layout.Table;
 import liquidustry.content.LDItems;
+import arc.util.io.Reads;
+import arc.util.io.Writes;
 
 public class GelationBlock extends LiquidBlock {
+    public TextureRegion bottomRegion;
     public float flowRate = 120f; // Equivalent flowrate to a standard Liquid Pump
     public float gelLiquidConversion = 10f; // Amount of liquid required to produce one gelled item
     public float craftTime = gelLiquidConversion / flowRate; // Time required to produce one gelled item based on flow rate and gel-liquid conversion
@@ -41,9 +48,29 @@ public class GelationBlock extends LiquidBlock {
         });
     }
 
+    @Override
+    public void load() {
+        super.load();
+        bottomRegion = Core.atlas.find(name + "-bottom");
+    }
+
     public class GelationBuilding extends Building {
         public float progress;
         public Item selectedOutput;
+
+        @Override
+        public void write(Writes write) {
+            super.write(write);
+            write.f(progress);
+            write.s(selectedOutput == null ? -1 : selectedOutput.id); // if no item is selected, save -1. Otherwise, save the item's ID.
+        }
+
+        @Override
+        public void read(Reads read, byte revision) {
+            super.read(read, revision);
+            progress = read.f();
+            selectedOutput = Vars.content.item(read.s()); // Read the Item ID and restore the Item from the registry.
+        }
 
         @Override
         public void buildConfiguration(Table table) {
@@ -54,6 +81,18 @@ public class GelationBlock extends LiquidBlock {
                 () -> selectedOutput,
                 item -> configure(item) // Safely routes to config() for multiplayer
             );
+        }
+
+        @Override
+        public void draw() {
+            if (selectedOutput != null) {
+                Draw.color(selectedOutput.color);
+            } else {
+                Draw.color(Color.valueOf("2f2d39"));
+            }
+            Draw.rect(bottomRegion, x, y);
+            Draw.color();
+            super.draw();
         }
 
         @Override

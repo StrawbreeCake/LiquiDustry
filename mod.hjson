@@ -1,7 +1,7 @@
 displayName: "LiquiDustry"
 name: "liquidustry"
 author: "StrawbreeCake"
-main: "liquidustry.LiquiDustry"
+main: "liquidustry.LiquiDustryMod"
 description: "Transport liquids with drones!"
 
 java: true

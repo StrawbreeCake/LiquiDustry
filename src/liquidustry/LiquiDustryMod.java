@@ -10,8 +10,8 @@ import mindustry.mod.*;
 import static arc.Core.*;
 import static mindustry.Vars.*;
 
-public class LiquiDustry extends Mod{
-    public LiquiDustry(){
+public class LiquiDustryMod extends Mod{
+    public LiquiDustryMod(){
         // Load all assets once they're added into Vars.tree
         Events.on(FileTreeInitEvent.class, e -> app.post(() -> {
             if(!headless){

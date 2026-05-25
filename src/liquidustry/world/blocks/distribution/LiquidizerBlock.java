@@ -1,4 +1,4 @@
-package liquidustry.world.blocks.liquid;
+package liquidustry.world.blocks.distribution;
 
 import mindustry.gen.Building;
 import mindustry.type.Item;
@@ -6,10 +6,17 @@ import mindustry.type.Liquid;
 import mindustry.Vars;
 import mindustry.world.blocks.ItemSelection;
 import mindustry.world.blocks.liquid.*;
+import arc.Core;
+import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
 import arc.scene.ui.layout.Table;
+import arc.util.io.Reads;
+import arc.util.io.Writes;
 import liquidustry.content.LDItems;
 
 public class LiquidizerBlock extends LiquidBlock {
+    public TextureRegion bottomRegion;
     public float flowRate = 120f; // Equivalent flowrate to a standard Liquid Pump
     public float gelLiquidConversion = 10f; // Amount of liquid required to produce one gelled item
     public float craftTime = gelLiquidConversion / flowRate; // Time required to produce one gelled item based on flow rate and gel-liquid conversion
@@ -49,9 +56,29 @@ public class LiquidizerBlock extends LiquidBlock {
         });
     }
 
+    @Override
+    public void load() {
+        super.load();
+        bottomRegion = Core.atlas.find(name + "-bottom");
+    }
+
     public class LiquidizerBuilding extends Building {
         public float progress;
         public Liquid selectedOutput;
+
+        @Override
+        public void write(Writes write) {
+            super.write(write);
+            write.f(progress);
+            write.s(selectedOutput == null ? -1 : selectedOutput.id); // if no liquid is selected, save -1. Otherwise, save the liquid's ID.
+        }
+
+        @Override
+        public void read(Reads read, byte revision) {
+            super.read(read, revision);
+            progress = read.f();
+            selectedOutput = Vars.content.liquid(read.s()); // Read the Liquid ID and restore the Liquid from the registry.
+        }
 
         @Override
         public void buildConfiguration(Table table) {
@@ -62,6 +89,18 @@ public class LiquidizerBlock extends LiquidBlock {
                 () -> selectedOutput,
                 liquid -> configure(liquid) // Safely routes to config() for multiplayer
             );
+        }
+
+        @Override
+        public void draw() {
+            if (selectedOutput != null) {
+                Draw.color(selectedOutput.color);
+            } else {
+                Draw.color(Color.valueOf("2f2d39"));
+            }
+            Draw.rect(bottomRegion, x, y);
+            Draw.color();
+            super.draw();
         }
 
         @Override
